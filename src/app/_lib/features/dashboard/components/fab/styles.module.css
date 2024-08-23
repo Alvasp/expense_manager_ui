@@ -1,0 +1,13 @@
+.open {
+    position: fixed;
+    z-index: 1;
+    opacity: 1;
+    transition: bottom 0.5s ease, opacity 0.2s ease
+}
+
+.closed {
+    position: fixed;
+    z-index: 0;
+    opacity: 0;
+    transition: bottom 0.5s ease, opacity 0.2s ease
+}

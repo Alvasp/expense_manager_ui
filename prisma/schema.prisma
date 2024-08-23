@@ -1,0 +1,40 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model categories {
+  id             Int            @id @default(autoincrement())
+  name           String         @db.VarChar(100)
+  icon           String         @db.VarChar(100)
+  type           Int
+  movement_types movement_types @relation(fields: [type], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_categories_types")
+  movements      movements[]
+}
+
+model movement_exceptions {
+  date_start  DateTime @db.Date
+  movement_id Int
+  id          Int      @id(map: "movement_exceptions_pk") @default(autoincrement())
+}
+
+model movement_types {
+  id         Int          @id @default(autoincrement())
+  name       String       @db.VarChar(100)
+  categories categories[]
+}
+
+model movements {
+  id         Int        @id @default(autoincrement())
+  name       String     @db.VarChar(100)
+  date_start DateTime   @db.Date
+  date_end   DateTime?  @db.Date
+  recurrent  Boolean
+  category   Int
+  amount     Int
+  categories categories @relation(fields: [category], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_movements_categories")
+}
