@@ -1,15 +1,18 @@
-import { Fragment, Suspense } from "react"
-import CategoryFilter from "../../../_lib/features/categories/components/category-filter.client"
-import { CategoryViewType, categoryViewTypes } from "../../../_lib/features/categories/types/definitions"
-import CategoryList from "@/app/_lib/features/categories/components/category-list.client"
-import CategoryListSkeleton from "@/app/_lib/features/categories/components/category-list-skeleton.server"
-import CategoryFilterSkeleton from "@/app/_lib/features/categories/components/categories-filter-skeleton.server"
-import { getCategories } from "@/app/_lib/features/categories/actions/actions"
-import dynamic from "next/dynamic"
+import PageTitle from "@/app/lib/components/layout/title";
+import { getCategories } from "@/app/lib/features/categories/actions/actions";
+import CategoryFilterSkeleton from "@/app/lib/features/categories/components/categories-filter-skeleton.server";
+import CategoryAddEditModal from "@/app/lib/features/categories/components/category-add-edit-modal.client";
+import CategoryFilter from "@/app/lib/features/categories/components/category-filter.client";
+import CategoryListSkeleton from "@/app/lib/features/categories/components/category-list-skeleton.server";
+import CategoryList from "@/app/lib/features/categories/components/category-list.client";
+import { CategoryViewType, categoryViewTypes } from "@/app/lib/features/categories/types/definitions";
+import { CategoryIconEnum } from "@/app/lib/types/definitions";
+import { Button } from "@nextui-org/react";
+import { Fragment, Suspense } from "react";
 
 type SearchParamType = { slug?: string[] }
 
-export default async function page({
+export default async function CategoriesPage({
     params,
 }:
     { params: SearchParamType }) {
@@ -20,11 +23,17 @@ export default async function page({
 
     return (
         <Fragment>
-            <div className="flex justify-between mb-20">
+            <PageTitle title={"Categories"} icon={"category"} />
+
+            <div className="flex justify-between mb-10 mt-8">
                 <Suspense fallback={<CategoryFilterSkeleton />}>
                     <CategoryFilter selectedFilter={filter} dataProm={categories} />
                 </Suspense>
-                {/* <Button color='primary'>Añadir</Button> */}
+
+                <CategoryAddEditModal
+                    launcher={<Button color="primary">Añadir</Button>}
+                    defaultValues={{ id: 0, name: '', type: { id: filter === 'incomes' ? 1 : 2, name: filter }, icon: CategoryIconEnum.account_balance, system: false }} />
+
             </div>
 
             <Suspense fallback={<CategoryListSkeleton />}>

@@ -1,19 +1,19 @@
-
-import { Suspense } from "react";
-import { IDashboardPageCriteria } from "../../../_lib/features/dashboard/types/definitions";
-import Balance from "../../../_lib/features/dashboard/components/balance/balance.server";
-import PeriodFilter from "../../../_lib/features/dashboard/components/periodFilter/period-filter.client";
-import PeriodFilterSkeleton from "../../../_lib/features/dashboard/components/periodFilter/period-filter-skeleton.server";
+import PageTitle from "@/app/lib/components/layout/title";
+import { getMovements } from "@/app/lib/features/dashboard/actions/actions";
+import AggregatedDataSkeleton from "@/app/lib/features/dashboard/components/aggregatedData/aggregated-data-skeleton.server";
+import AggregatedData from "@/app/lib/features/dashboard/components/aggregatedData/aggregated-data.client";
+import Balance from "@/app/lib/features/dashboard/components/balance/balance.server";
+import Fab from "@/app/lib/features/dashboard/components/fab/fab.client";
+import PeriodFilterSkeleton from "@/app/lib/features/dashboard/components/periodFilter/period-filter-skeleton.server";
+import PeriodFilter from "@/app/lib/features/dashboard/components/periodFilter/period-filter.client";
+import StoreCriteriaInitializer from "@/app/lib/features/dashboard/components/store-criteria-initializer";
+import { IDashboardPageCriteria } from "@/app/lib/features/dashboard/types/definitions";
 import { isNumber } from "lodash";
 import moment from "moment";
-import Fab from "@/app/_lib/features/dashboard/components/fab/fab.client";
-import AggregatedData from "@/app/_lib/features/dashboard/components/aggregatedData/aggregated-data.client";
-import AggregatedDataSkeleton from "@/app/_lib/features/dashboard/components/aggregatedData/aggregated-data-skeleton.server";
-import StoreCriteriaInitializer from "@/app/_lib/features/dashboard/components/store-criteria-initializer";
-import { getMovements } from "@/app/_lib/features/dashboard/actions/actions";
+import { Suspense } from "react";
 
 type SearchParamType = { slug?: string[] }
-export default async function Page({
+export default async function DashboardPage({
   params,
 }:
   { params: SearchParamType }
@@ -26,6 +26,9 @@ export default async function Page({
 
   return (
     <StoreCriteriaInitializer criteria={filter}>
+      <PageTitle title={"Dashboard"} icon={"monitoring"} />
+
+
       <div className="mb-5 flex justify-end">
         <Suspense fallback={<PeriodFilterSkeleton />}>
           <PeriodFilter criteria={filter} data={data} />

@@ -12,6 +12,7 @@ model categories {
   name           String         @db.VarChar(100)
   icon           String         @db.VarChar(100)
   type           Int
+  system         Boolean        @default(false)
   movement_types movement_types @relation(fields: [type], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_categories_types")
   movements      movements[]
 }
@@ -36,5 +37,14 @@ model movements {
   recurrent  Boolean
   category   Int
   amount     Int
+  account_id Int
   categories categories @relation(fields: [category], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_movements_categories")
+  accounts   accounts   @relation(fields: [account_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "movements_accounts_fk")
+}
+
+model accounts {
+  id        Int         @id(map: "accounts_pk") @default(autoincrement())
+  name      String?     @db.VarChar
+  system    Boolean     @default(false)
+  movements movements[]
 }

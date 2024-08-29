@@ -2,12 +2,18 @@ import { NextUIProvider, Navbar, NavbarBrand } from "@nextui-org/react";
 import { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { ToastContainer } from "react-toastify";
-import { auth } from "../_lib/auth";
-import Logo from "../_lib/components/layout/logo";
-import UserActions from "../_lib/components/layout/user-actions";
 import NextTopLoader from 'nextjs-toploader';
-import Menu from "../_lib/components/layout/menu";
+
+import { auth } from "../lib/auth";
+import Logo from "../lib/components/layout/logo";
+import UserActions from "../lib/components/layout/user-actions";
+import Menu from "../lib/components/layout/menu";
+
 import "../globals.css";
+import 'react-toastify/dist/ReactToastify.css';
+import Footer from "../lib/components/layout/footer";
+
+
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -32,7 +38,7 @@ export default async function RootLayout({
 
         <NextUIProvider>
           <main className="light">
-            <Navbar  maxWidth="full" style={{ backgroundColor: 'rgb(59, 130, 246)', color: 'white' }}  >
+            <Navbar maxWidth="full" style={{ backgroundColor: 'rgb(59, 130, 246)', color: 'white' }}  >
               <NavbarBrand className="md:flex-grow-0 md:min-w-[250px]">
                 <Logo />
                 <p className="font-bold text-inherit">EXPENSE MANAGER</p>
@@ -40,12 +46,13 @@ export default async function RootLayout({
               <Menu />
               <UserActions session={session} />
             </Navbar>
-            <div className="container mx-auto py-10">
+            <div className="container mx-auto py-10 h-full">
               {children}
             </div>
           </main>
         </NextUIProvider>
         <ToastContainer />
+        <Footer />
       </body>
     </html>
   );

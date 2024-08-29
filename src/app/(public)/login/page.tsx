@@ -1,6 +1,6 @@
-import { signIn } from "../../_lib/auth"
 import Image from 'next/image'
 import MySvgImg from "/public/images/google-icon.svg";
+import { signIn } from '@/app/lib/auth';
 
 export default async function Page() {
     return (
