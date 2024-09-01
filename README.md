@@ -1,36 +1,31 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-## Getting Started
+## Description
 
-First, run the development server:
+Sample full stack app using Nextjs 14 + prisma/postgreSQL. The goal for this project was to implement a very simplified expense manager app, that allows users to track expenses / incomes for specific periods of times.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+![App Screenshot](/public/screenshots/dashboard.png)
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+![App Screenshot](/public/screenshots/categories.png)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+![App Screenshot](/public/screenshots/accounts.png)
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
 
-## Learn More
+## Environment Variables
+The following environment variables are needed in the project:
 
-To learn more about Next.js, take a look at the following resources:
+--AuthJS secret key
+AUTH_SECRET=
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+--Google OAuth ID + Secret 
+AUTH_GOOGLE_ID=
+AUTH_GOOGLE_SECRET=
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+--PostgreSQL connection string
+DATABASE_URL="postgresql://x:y@host:port/db?schema=public"
 
-## Deploy on Vercel
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## How to run
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+ - create db and run script.sql
+ - configure .env variables
+ - npm i && npm run dev
