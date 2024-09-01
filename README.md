@@ -3,6 +3,14 @@
 
 Sample full stack app using Nextjs 14 + prisma/postgreSQL. The goal for this project was to implement a very simplified expense manager app, that allows users to track expenses / incomes for specific periods of times.
 
+some features are:
+- Google sig-in
+- Dashboard with overal and detailed view
+- Categories CRUD
+- Accounts CRUD
+- Caching
+- Prisma ORM
+
 ![App Screenshot](/public/screenshots/dashboard.png)
 
 ![App Screenshot](/public/screenshots/categories.png)
